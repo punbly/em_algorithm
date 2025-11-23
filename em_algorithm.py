@@ -1,4 +1,7 @@
 import numpy as np
+import matplotlib
+
+matplotlib.use('MacOSX')  # You could use other matplotlib backends (TkAgg, Agg, Qt5Agg, etc.)
 import matplotlib.pyplot as plt
 from scipy.stats import multivariate_normal
 from matplotlib.patches import Ellipse
@@ -62,8 +65,7 @@ def plot_ground_truth(X, true_labels, true_params):
     for k, mean in enumerate(true_params['means']):
         plt.scatter(mean[0], mean[1],
                     c=colors[k], marker='x',
-                    s=300, linewidths=4,
-                    edgecolors='black')
+                    s=300, linewidths=4)
 
     plt.title('Ground Truth - True Clusters', fontsize=14, fontweight='bold')
     plt.xlabel('X1', fontsize=12)
