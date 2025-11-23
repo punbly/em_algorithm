@@ -197,6 +197,8 @@ def em_algorithm(X, K, max_iter=100, tol=1e-4, verbose=True):
 
     log_likelihoods = []
 
+    responsibilities = None
+
     print(f"\n{'=' * 60}")
     print(f"EM ALGORITHM STARTING")
     print(f"{'=' * 60}")
@@ -254,7 +256,7 @@ def plot_convergence(log_likelihoods):
 
 
 def plot_final_clusters(X, mu, sigma, responsibilities):
-    # Find the cluster with highest probability for each point
+    # Find the cluster with the highest probability for each point
     predicted_labels = np.argmax(responsibilities, axis=1)
 
     plt.figure(figsize=(10, 8))
@@ -308,9 +310,6 @@ def plot_gaussian_ellipse(mean, cov, color, n_std=2.0):
 
 
 def plot_comparison(X, true_labels, predicted_labels):
-    """
-    Ground truth vs Predicted comparison
-    """
     fig, axes = plt.subplots(1, 2, figsize=(16, 6))
 
     colors = ['red', 'blue', 'green']
@@ -345,9 +344,6 @@ def plot_comparison(X, true_labels, predicted_labels):
 
 
 def calculate_accuracy(true_labels, predicted_labels):
-    """
-    Computes simple accuracy (with cluster label matching)
-    """
     from scipy.optimize import linear_sum_assignment
 
     K = len(np.unique(true_labels))
@@ -366,9 +362,6 @@ def calculate_accuracy(true_labels, predicted_labels):
 
 
 def main():
-    """
-    Runs all steps of the EM algorithm project
-    """
     print("\n" + "=" * 60)
     print("EM ALGORITHM PROJECT")
     print("Expectation-Maximization with Gaussian Mixture Model")
@@ -384,7 +377,7 @@ def main():
     plot_ground_truth(X, true_labels, true_params)
     print()
 
-    # STEP 3 & 4: Initialize and plot initial state
+    # STEP 3 & 4: Initialize and plot the initial state
     print("STEP 3 & 4: Initializing parameters...")
     K = 3  # Number of clusters
     mu_init, sigma_init, pi_init = initialize_parameters(X, K)
